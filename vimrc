@@ -1,66 +1,100 @@
 " Ward off unexpected changes and reset options from distro or resourcing.
 set nocompatible
 
-" Use pathogen to easily modify the runtime path to include all plugins under
-" the ~/.vim/bundle directory
-filetype off                    " force reloading *after* pathogen loaded
+" ========== General Config ========== " 
+
+set confirm		" Prevents you from quitting with unsaved files.
+set number		" Display line numbers.
+set history=1000	" Store lots of :cmdline history.
+set ruler		" Show cursor position
+set showcmd		" Show partial commands in status line.
+set showmatch   	" Show matching parens/brackets
+set showmode		" Show current mode at bottom.
+set visualbell		" No sounds.
+set gcr=a:blinkon0	" Disable cursor blink.
+
+" Buffers can exist in the background without being in a window.
+set hidden
+
+"Enable syntax highlighting.
+syntax on
+
+" Change leader to a comma because backslash is unreliable.
+" All \x commands turn into ,x
+" Map leader must be set before plugins begin loading.
+let mapleader=","
+
+" ========== Pathogen plugin Initialization ========== " 
+" Use pathogen to easily modify the runtime path to include all plugins
+" under the ~/.vim/bundle directory
+filetype off               " force reloading *after* pathogen loaded
 call pathogen#helptags()
 call pathogen#infect()
+
+" ========== Turn Off Swap Files ========== "
+set noswapfile
+set nobackup
+set nowb
+
+" ========== Persistent Undo ========== "
+" Keep undo history across sessions, by storing in file.
+" Only works all the time. Not placed in .vim because git
+" is being used to manage for different computers.
+if has('persistent_undo')
+  silent !mkdir ~/temp/vimbak > /dev/null 2>&1
+  set undodir=~/temp/vimbak
+  set undofile
+endif
+
+" ========== Indentation ========== "
+
+set autoindent
+set smartindent
+set smarttab
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
+set expandtab
+
+" Automatically indent based on file type.
+filetype indent plugin on
+
+" Display tabs and trailing spaces visually.
+set list listchars=tab:\ \ ,trail:·
+
+set nowrap	" Don't wrap lines.
+set linebreak	" Display long lines by breaking.
+
+" ========== Folds ========== "
+set foldmethod=indent	" Fold based on indent.
+set foldnestmax=3	" Deepest fold is 3 levels.
+set nofoldenable	" Don't fold by default.
+
+" ========== Completion ========== "
+
+set wildmode=list:longest    " Complete to ambiguity, like shell.
+set wildmenu		" Enable ctrl-n and ctrl-p to scroll matches.
+set wildignore=*.o,*.obj,*~	" Ignore when tab completing.
+set wildignore+=*temp/vimbak*
+set wildignore+=*sass-cache*
+set wildignore+=DS_Store*
+set wildignore+=vendor/rails/**
+set wildignore+=vendor/cache/**
+set wildignore+=*.gem
+set wildignore+=log/**
+set wildignore+=tmp/**
+set wildignore+=*.png,*.jpg,*.gif
+
+
+" ========== Status Display ========== "
 
 " Always display the status line, even if only one window is displayed
 set laststatus=2
 
 set statusline=%<%f\%h%m%r%=%-20.(line=%l\ \ col=%c%V\ \ totlin=%L%)\ \ \%h%m%r%=%-40(bytval=0x%B,%n%Y%)\%P
 
-set background=dark
-set guioptions-=T
-set wrap
 
-silent execute '!rm -f ~/temp/vimbak/*'
-set backupdir=~/temp/vimbak
-set directory=~/temp/vimbak
-set bk
-
-" Choose a different font, for my peeps health.
-"set guifont=Nimbus\ Mono\ L\ Bold\ 13
-set guifont=Andale\ Mono\ 11
-
+" ========== Encoding ========== "
+"
 " Set the default file encoding to UTF-8
 set encoding=utf-8
-
-"Enable syntax highlighting.
-syntax on
-
-" Colorscheme
-:colorscheme desert
-
-" Automatically indent based on file type.
-filetype indent plugin on
-
-" Allow backspacing over autoindent, line breaks, and start of insert.
-set backspace=indent,eol,start
-
-" Lines for bash support plugin
-let g:BASH_Authorname    = 'Oliver Savage'
-let g:BASH_Email         = 'oliver.savage@gmail.com'
-let g:BASH_Company       = 'Soilweavers'
-
-" This affects how text is displayed not how it is actually formed.
-" It makes it so that words wrap without being split.
-set linebreak
-
-" Better command-line completion.
-set wildmenu
-
-set confirm		" Prevents you from quitting with unsaved files.
-set number		" Display line numbers.
-set ruler		" Show cursor position
-set esckeys     	" Allow cursor keys in insert mode
-set showcmd		" Show partial commands in status line.
-set showmatch   	" Show matching parens/brackets
-set visualbell		"Mind your manners
-
-" Reset the terminal code for visual bell, no flash no beep. Yay!
-set t_vb=
-
-setlocal comments-=:#
