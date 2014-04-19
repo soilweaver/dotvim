@@ -16,6 +16,10 @@ set gcr=a:blinkon0	" Disable cursor blink.
 " Buffers can exist in the background without being in a window.
 set hidden
 
+set t_Co=256
+set background=dark
+colorscheme:distinguished
+
 "Enable syntax highlighting.
 syntax on
 
