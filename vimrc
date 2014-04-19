@@ -18,7 +18,7 @@ set hidden
 
 set t_Co=256
 set background=dark
-colorscheme:distinguished
+colorscheme desert
 
 "Enable syntax highlighting.
 syntax on
