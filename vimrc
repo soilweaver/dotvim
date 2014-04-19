@@ -62,8 +62,8 @@ filetype indent plugin on
 " Display tabs and trailing spaces visually.
 set list listchars=tab:\ \ ,trail:·
 
-set nowrap	" Don't wrap lines.
-set linebreak	" Display long lines by breaking.
+set wrap	" Don't wrap lines.
+"set linebreak	" Display long lines by breaking.
 
 " ========== Folds ========== "
 set foldmethod=indent	" Fold based on indent.
