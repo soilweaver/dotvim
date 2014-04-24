@@ -66,8 +66,12 @@ filetype indent plugin on
 " Display tabs and trailing spaces visually.
 set list listchars=tab:\ \ ,trail:·
 
-set wrap	" Don't wrap lines.
-"set linebreak	" Display long lines by breaking.
+"set wrap	" Don't wrap lines.
+set linebreak	" Display long lines by breaking.
+set nolist    " Control TAB and EOL display.
+set textwidth=0   " Disable auto line breaks.
+set wrapmargin=0  " Stop auto insertion of EOL.
+set showbreak=>>\ \   " Indicate wrapped lines.
 
 " ========== Folds ========== "
 set foldmethod=indent	" Fold based on indent.
@@ -94,9 +98,6 @@ set wildignore+=*.png,*.jpg,*.gif
 
 " Always display the status line, even if only one window is displayed
 set laststatus=2
-
-set statusline=%<%f\%h%m%r%=%-20.(line=%l\ \ col=%c%V\ \ totlin=%L%)\ \ \%h%m%r%=%-40(bytval=0x%B,%n%Y%)\%P
-
 
 " ========== Encoding ========== "
 "
